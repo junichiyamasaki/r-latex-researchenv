@@ -1,0 +1,93 @@
+{
+    "name": "${localWorkspaceFolderBasename}",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "runArgs": [
+        "--hostname",
+        "docker"
+    ],
+    "shutdownAction": "stopContainer",
+    "workspaceFolder": "/home/rstudio/${localWorkspaceFolderBasename}",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/rstudio/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+    // Put .latexmkrc in the home directory
+    "remoteUser": "rstudio",
+    "mounts": [
+        "source=${localWorkspaceFolder}/.latexmkrc,target=/home/rstudio/.latexmkrc,type=bind,consistency=cached",
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.cache/renv,target=/renv/cache,type=bind,consistency=cached"
+    ],
+    // Optional: Install R packages on start
+    // "postCreateCommand": "R -q -e 'renv::restore()'",
+    // Init RStudio Server on start
+    "overrideCommand": false,
+    "containerEnv": {
+        // rocker/rstudio settings
+        // https://rocker-project.org/images/versioned/rstudio.html#environment-variables
+        "DISABLE_AUTH": "true", // passwordless login to rstudio
+        "ROOT": "true", // enable sudo
+        "PASSWORD": "password",
+        "RENV_PATHS_CACHE": "/renv/cache"
+    },
+    "forwardPorts": [
+        8787 // RStudio Server
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "reditorsupport.r",
+                "RDebugger.r-debugger",
+                "James-Yu.latex-workshop"
+            ],
+            "settings": {
+                // R console
+                "r.bracketedPaste": true,
+                "r.rterm.linux": "/usr/local/bin/radian",
+                // plot
+                "r.plot.useHttpgd": true,
+                // auto build & clean
+                "latex-workshop.latex.watch.usePolling": true,
+                "latex-workshop.latex.autoBuild.interval": 1000,
+                "latex-workshop.latex.autoBuild.run": "onSave",
+                "latex-workshop.latex.autoClean.run": "never",
+                // latexmk
+                "latex-workshop.latex.recipes": [
+                    {
+                        "name": "latexmk 🔃",
+                        "tools": [
+                            "latexmk"
+                        ]
+                    }
+                ],
+                "latex-workshop.latex.tools": [
+                    {
+                        "name": "latexmk",
+                        "command": "latexmk",
+                        "args": [
+                            "-silent",
+                            "%DOC%"
+                        ],
+                        "env": {}
+                    }
+                ],
+                // formatter
+                "[latex]": {
+                    "editor.formatOnSave": true,
+                    "editor.formatOnPaste": true,
+                    "editor.defaultFormatter": "James-Yu.latex-workshop"
+                },
+                "latex-workshop.latexindent.path": "/usr/local/texlive/bin/x86_64-linux/latexindent",
+                "latex-workshop.latexindent.args": [
+                    "%TMPFILE%",
+                    "-c=%DIR%/",
+                    "-y=defaultIndent: '%INDENT%'"
+                ],
+                // bibtex
+                "latex-workshop.bibtex-format.sort.enabled": true,
+                "latex-workshop.bibtex-fields.sort.enabled": true,
+                // pdf preview
+                "latex-workshop.synctex.afterBuild.enabled": true,
+                "latex-workshop.view.pdf.viewer": "tab"
+            }
+        }
+    }
+}

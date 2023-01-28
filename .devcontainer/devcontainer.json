@@ -15,8 +15,8 @@
     // Put .latexmkrc in the home directory
     "remoteUser": "rstudio",
     "mounts": [
-        "source=${localWorkspaceFolder}/.latexmkrc,target=/home/rstudio/.latexmkrc,type=bind,consistency=cached",
-        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.cache/renv,target=/renv/cache,type=bind,consistency=cached"
+        "source=${localWorkspaceFolder}/.latexmkrc,target=/home/rstudio/.latexmkrc,type=bind,consistency=cached"
+        // "source=${localEnv:HOME}${localEnv:USERPROFILE}/.cache/renv,target=/renv/cache,type=bind,consistency=cached"
     ],
     // Optional: Install R packages on start
     // "postCreateCommand": "R -q -e 'renv::restore()'",
@@ -27,8 +27,8 @@
         // https://rocker-project.org/images/versioned/rstudio.html#environment-variables
         "DISABLE_AUTH": "true", // passwordless login to rstudio
         "ROOT": "true", // enable sudo
-        "PASSWORD": "password",
-        "RENV_PATHS_CACHE": "/renv/cache"
+        "PASSWORD": "password"
+        // "RENV_PATHS_CACHE": "/renv/cache"
     },
     "forwardPorts": [
         8787 // RStudio Server

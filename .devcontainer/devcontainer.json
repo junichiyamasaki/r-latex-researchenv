@@ -5,7 +5,9 @@
     },
     "runArgs": [
         "--hostname",
-        "docker"
+        "docker",
+        "--platform",
+        "linux/amd64"
     ],
     "shutdownAction": "stopContainer",
     "workspaceFolder": "/home/rstudio/${localWorkspaceFolderBasename}",

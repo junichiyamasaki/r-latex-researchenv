@@ -1,6 +1,13 @@
 .DS_Store
 
 
+# Ignore data but keep its structure
+
+/data/**
+!/data/**/
+!/data/**/.gitkeep
+
+
 # ----- R files -----
 
 # History files

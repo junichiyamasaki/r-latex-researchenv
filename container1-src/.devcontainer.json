@@ -1,0 +1,41 @@
+
+{
+  "name": "Container 1",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "container-1",
+  "shutdownAction": "none",
+  // Open the sub-folder with the source code
+    "workspaceFolder": "/workspace",
+    // Optional: Install R packages on start
+    // "postCreateCommand": "R -q -e 'renv::restore()'",
+    // Init RStudio Server on start
+    "overrideCommand": false,
+      "extensions": ["reditorsupport.r",
+        "RDebugger.r-debugger",
+        "GitHub.copilot",
+        "GitHub.copilot-labs"],
+    "containerEnv": {
+        // rocker/rstudio settings
+        // https://rocker-project.org/images/versioned/rstudio.html#environment-variables
+        "DISABLE_AUTH": "true", // passwordless login to rstudio
+        "ROOT": "true", // enable sudo
+        "PASSWORD": "password"
+        // "RENV_PATHS_CACHE": "/renv/cache"
+    },
+    "forwardPorts": [
+        8787 // RStudio Server
+    ],
+    "customizations": {
+        "vscode": {
+            "settings": {
+                // R console
+                "r.bracketedPaste": true,
+                "r.rterm.linux": "/usr/local/bin/radian",
+                // plot
+                "r.plot.useHttpgd": false,
+                // auto build & clean
+               
+            }
+        }
+    }
+}

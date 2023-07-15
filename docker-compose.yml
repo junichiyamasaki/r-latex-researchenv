@@ -1,14 +1,14 @@
 version: '3'
 services:
   container-1:
-    image: rocker/geospatial
-    # build: 
-    #   context: .
-    #   dockerfile: container1-src/Dockerfile
+    # image: rocker/geospatial
+    build: 
+      context: .
+      dockerfile: container1-src/Dockerfile
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
-    command: /bin/sh -c "while sleep 1000; do :; done && apt-get update && apt-get install -y --no-install-recommends && apt-get install python3.6 &&  apt install python3-pip && pip install -U radian"
+    command: /bin/sh -c "while sleep 1000; do :; done"
 
     links:
       - container-2

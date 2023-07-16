@@ -15,7 +15,10 @@ services:
     # ...
 
   container-2:
-    image: danteev/texlive:latest
+    # image: danteev/texlive:latest
+    build:  
+      context: .
+      dockerfile: container2-src/Dockerfile
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached

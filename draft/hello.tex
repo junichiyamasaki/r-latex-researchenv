@@ -1,15 +1,28 @@
-\documentclass[uplatex]{jsarticle}
+% This is a simple sample document.  For more complicated documents take a look in the exercise tab. Note that everything that comes after a % symbol is treated as comment and ignored when the code is compiled.
+\documentclass{article} % \documentclass{} is the first command in any LaTeX code.  It is used to define what kind of document you are creating such as an article or a book, and begins the document preamble
+\usepackage{natbib}
+\usepackage{aer}
+\usepackage{amsmath}
+\usepackage{graphicx,hyperref}
+\usepackage[capposition=top]{floatrow}
+\usepackage{subcaption}
 
-\title{Hello, World!}
-\date{}
+\usepackage{color}% \usepackage is a command that allows you to add functionality to your LaTeX code
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
-\begin{document}
+\title{Test Latex File}  % Sets article title
+\author{Junichi Yamasaki} % Sets authors name
+\date{\today} % Sets date for date compiled
 
-\maketitle
+% The preamble ends with the command \begin{document}
+\begin{document} % All begin commands must be paired with an end command somewhere
+\maketitle % creates title using information in preamble (title, author, date)
 
-こんにちは世界！\cite{helloworld}
+
+Hello! We can cite a paper like this \citep{angrist_identification_1996}.
 
 \bibliography{ref}
-\bibliographystyle{junsrt}
+\bibliographystyle{aer}
 
 \end{document}

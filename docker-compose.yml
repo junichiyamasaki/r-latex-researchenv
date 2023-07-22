@@ -1,0 +1,26 @@
+version: '3'
+services:
+  container-1:
+    # image: rocker/geospatial
+    build: 
+      context: .
+      dockerfile: container1-src/Dockerfile
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+    links:
+      - container-2
+    # ...
+
+  container-2:
+    # image: danteev/texlive:latest
+    build:  
+      context: .
+      dockerfile: container2-src/Dockerfile
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    # ...

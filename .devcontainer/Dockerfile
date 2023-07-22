@@ -1,1 +1,0 @@
-FROM --platform=linux/amd64 ghcr.io/junichiyamasaki/r-latex:vscode-geospatial-4.2.2
